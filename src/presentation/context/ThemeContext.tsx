@@ -22,7 +22,9 @@ export const ThemeContext = createContext({
 
 
 export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
+    
     const colorScheme = useColorScheme();
+
     const isDarkTheme = colorScheme === 'dark';
     const theme = isDarkTheme ? DarkTheme : LightTheme;
 

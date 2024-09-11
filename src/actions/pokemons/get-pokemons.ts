@@ -10,7 +10,7 @@ export  const sleep = async() => {
 export const getPokemons = async (page: number, limit: number = 20):Promise<Pokemon[]> => {
 
 
-    await sleep()
+    //await sleep()
     
     try {
 
@@ -24,11 +24,10 @@ export const getPokemons = async (page: number, limit: number = 20):Promise<Poke
 
         const pokeApiPokemons = await Promise.all(pokemonPromise)
 
-        const pokemons = pokeApiPokemons.map((item) => PokemonMapper.pokeApiPokemonToEntity(item.data))
+        const pokemonsPromises = pokeApiPokemons.map((item) => PokemonMapper.pokeApiPokemonToEntity(item.data))
 
-        console.log(pokemons)
 
-        return pokemons
+        return Promise.all(pokemonsPromises)
     } catch (error) {
         console.log(error)
         throw new Error('Error getting pokemons');
